@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidLongitudeException extends RestException {
 
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE = "Invlid latitude";
-	private static final String NOTE = "A valid latitude ranges from -180 to 180, both inclusive, and it must be in the format of signed degrees";
+	private static final String MESSAGE = "Invalid longitude";
+	private static final String NOTE = "A valid longitude ranges from -180 to 180, both inclusive, and it must be in the format of signed degrees";
 
 	private static InvalidLongitudeException INSTANCE = new InvalidLongitudeException(MESSAGE);
 
