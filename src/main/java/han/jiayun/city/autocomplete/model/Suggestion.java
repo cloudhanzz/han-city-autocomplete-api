@@ -11,15 +11,13 @@ import lombok.ToString;
  */
 @Getter
 @ToString
-public class Suggestion implements Comparable<Suggestion> {
+public class Suggestion extends Coordinate implements Comparable<Suggestion> {
 
 	/*
 	 * Format: city-level-name, state/province-name, country-name. e.g. London,
 	 * Ontario, Canada; London, Ohio, USA
 	 */
 	private String name;
-	private double latitude;
-	private double longitude;
 	
 	// 0 - 1, both inclusive
 	private double score;
@@ -30,12 +28,12 @@ public class Suggestion implements Comparable<Suggestion> {
 	}
 
 	public Suggestion latitude(double latitude) {
-		this.latitude = latitude;
+		setLatitude(latitude);
 		return this;
 	}
 
 	public Suggestion longitude(double longitude) {
-		this.longitude = longitude;
+		setLongitude(longitude);
 		return this;
 	}
 
