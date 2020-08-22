@@ -1,4 +1,4 @@
-package han.jiayun.campsite.city.autocomplete;
+package han.jiayun.city.autocomplete;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

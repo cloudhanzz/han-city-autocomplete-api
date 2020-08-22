@@ -1,4 +1,4 @@
-package han.jiayun.campsite.city.autocomplete;
+package han.jiayun.city.autocomplete;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
