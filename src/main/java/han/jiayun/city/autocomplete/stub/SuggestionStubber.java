@@ -1,5 +1,6 @@
 package han.jiayun.city.autocomplete.stub;
 
+import java.util.Arrays;
 import java.util.List;
 
 import han.jiayun.city.autocomplete.model.Suggestion;
@@ -13,7 +14,7 @@ import han.jiayun.city.autocomplete.model.Suggestion;
  */
 public final class SuggestionStubber {
 
-	private static final List<Suggestion> suggestions = List.of( //
+	private static List<Suggestion> suggestions = Arrays.asList(//
 			new Suggestion().name("Londontowne, MD, USA").latitude(38.93345).longitude(-76.54941).score(0.3),
 			new Suggestion().name("London, KY, USA").latitude(37.12898).longitude(-84.08326).score(0.5),
 			new Suggestion().name("London, OH, USA").latitude(39.88645).longitude(-83.44825).score(0.5),
