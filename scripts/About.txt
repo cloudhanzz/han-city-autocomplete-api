@@ -1,0 +1,19 @@
+This shell script is responsible for preparing the geoname entries to be used offline.
+
+1. It downloads http://download.geonames.org/export/dump/allCountries.zip which contains
+   over 12 millions places all over the world, unzip it.
+   
+2. It also downloads http://download.geonames.org/export/dump/admin1CodesASCII.txt which
+   contains the state codes and their corresponding state names, and the province codes
+   with their corresponding names.
+
+3. The unzipped allCountries.txt file is over 1.5G. It is infeasible to upload this big
+   file to GitHub due to the slow upload speed of ordinary home networks and the potential
+   limit set by GitHub. For this reason, the script removes all non-US and non-Canada
+   entries. To further reduce the file size, this script keeps only the minimal information 
+   of each entry, which are the place name, the province (or state) name, the country name,
+   the latitude, and the longitude.
+   
+4. Zip the resulted file to facilicate uploading to GitHub
+   
+5. It deletes all of the unused files.
