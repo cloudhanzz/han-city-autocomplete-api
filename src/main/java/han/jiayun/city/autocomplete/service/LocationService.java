@@ -18,7 +18,7 @@ public interface LocationService {
 	 * Returns a list of suggested locations based on the query string and the
 	 * optional latitude and longitude
 	 * 
-	 * @param queryString The required query term. For the sake of simplicity, this
+	 * @param queryTerm The required query term. For the sake of simplicity, this
 	 *                    project does not allow it to start with a punctuation or
 	 *                    contain white spaces only
 	 * @param latitude    It can be absent; but once present it must be in the range
@@ -29,5 +29,5 @@ public interface LocationService {
 	 *                    signed degrees.
 	 * @return
 	 */
-	List<Suggestion> searchLocations(String queryString, Optional<Double> latitude, Optional<Double> longitude);
+	List<Suggestion> searchLocations(String queryTerm, Optional<Double> latitude, Optional<Double> longitude);
 }
