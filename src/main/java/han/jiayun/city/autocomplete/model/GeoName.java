@@ -2,6 +2,7 @@ package han.jiayun.city.autocomplete.model;
 
 import lombok.Getter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import static han.jiayun.city.autocomplete.util.Constants.TAB_REGEX;
 
@@ -13,6 +14,7 @@ import static han.jiayun.city.autocomplete.util.Constants.TAB_REGEX;
  *
  */
 @Getter
+@Slf4j
 @ToString
 public class GeoName extends Coordinate {
 
@@ -41,14 +43,18 @@ public class GeoName extends Coordinate {
 	public GeoName(String geoLine) {
 		String[] parts = geoLine.split(TAB_REGEX);
 
-		this.city = parts[CITY_IDX];
-		double latitude = Double.parseDouble(parts[LATITUDE_IDX]);
-		double longitude = Double.parseDouble(parts[LONGITUDE_IDX]);
-		this.country = parts[COUNTRY_IDX];
-		this.admin1 = parts[ADMIN1_IDX];
+		try {
+			this.city = parts[CITY_IDX];
+			double latitude = Double.parseDouble(parts[LATITUDE_IDX]);
+			double longitude = Double.parseDouble(parts[LONGITUDE_IDX]);
+			this.country = parts[COUNTRY_IDX];
+			this.admin1 = parts[ADMIN1_IDX];
 
-		setLatitude(latitude);
-		setLongitude(longitude);
+			setLatitude(latitude);
+			setLongitude(longitude);
+		} catch (Exception e) {
+			log.debug("Skipped malformated: {}", geoLine);
+		}
 	}
 
 	/**
