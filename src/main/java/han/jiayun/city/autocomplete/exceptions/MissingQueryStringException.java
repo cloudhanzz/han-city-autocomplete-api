@@ -15,12 +15,13 @@ import org.springframework.http.HttpStatus;
 public class MissingQueryStringException extends RestException {
 
 	private static final long serialVersionUID = 1L;
+	public static final String MESSAGE = "Missing non-empty query string";
 	private static final String NOTE = "A non-empty query string must be provided, e.g. q=Washingt";
 
 	private static final MissingQueryStringException INSTANCE = new MissingQueryStringException();
 
 	private MissingQueryStringException() {
-		super("Missing non-empty query string", HttpStatus.BAD_REQUEST, NOTE);
+		super(MESSAGE, HttpStatus.BAD_REQUEST, NOTE);
 	}
 
 	public static MissingQueryStringException instance() {
