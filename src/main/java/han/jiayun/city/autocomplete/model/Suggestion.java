@@ -1,6 +1,8 @@
 package han.jiayun.city.autocomplete.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -10,6 +12,8 @@ import lombok.ToString;
  *
  */
 @Getter
+@Setter
+@NoArgsConstructor
 @ToString
 public class Suggestion extends Coordinate implements Comparable<Suggestion> {
 
@@ -21,6 +25,12 @@ public class Suggestion extends Coordinate implements Comparable<Suggestion> {
 	
 	// 0 - 1, both inclusive
 	private double score;
+	
+	public Suggestion(double latitude, double longitude, String name, double score) {
+		super(latitude, longitude);
+		setName(name);
+		setScore(score);
+	}
 
 	public Suggestion name(String name) {
 		this.name = name;
