@@ -2,9 +2,17 @@ package han.jiayun.city.autocomplete.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import han.jiayun.city.autocomplete.model.Suggestion;
 import han.jiayun.city.autocomplete.service.SearchWithCoordinateService;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
+@Service
 public class SearchWithCoordinateServiceImpl implements SearchWithCoordinateService {
 
 	@Override

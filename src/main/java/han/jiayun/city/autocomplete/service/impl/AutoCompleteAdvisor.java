@@ -14,6 +14,7 @@ import han.jiayun.city.autocomplete.service.AutoCompleteService;
 import han.jiayun.city.autocomplete.service.LongitudeValidatingService;
 import han.jiayun.city.autocomplete.service.QueryTermOnlySearchService;
 import han.jiayun.city.autocomplete.service.QueryTermValidingService;
+import han.jiayun.city.autocomplete.service.SearchWithCoordinateService;
 
 @Service
 public class AutoCompleteAdvisor implements AutoCompleteService {	
@@ -29,6 +30,9 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 
 	@Autowired
 	private QueryTermOnlySearchService queryTermOnlySearchService;
+	
+	@Autowired
+	private SearchWithCoordinateService searchWithCoordinateService;
 
 	@Override
 	public List<Suggestion> searchLocations(String queryTerm, int limit, Optional<Double> latitude,
@@ -40,15 +44,14 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 
 		List<Suggestion> suggestions = new ArrayList<>();
 		
-		if (latitude.isEmpty() && longitude.isEmpty()) {
+		if (latitude.isEmpty() || longitude.isEmpty()) {
 			suggestions = queryTermOnlySearchService.searchLocations(queryTerm, limit);
 		} else {
-			// call advisor that handle coordinates as well
+			suggestions = searchWithCoordinateService.searchLocations(queryTerm, limit, latitude.get(), longitude.get());
 		}
 		
 		Collections.sort(suggestions);
 		
 		return suggestions;
 	}
-
 }
