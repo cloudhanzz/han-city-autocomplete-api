@@ -1,5 +1,7 @@
 package han.jiayun.city.autocomplete.service;
 
+import java.util.List;
+
 /**
  * Service responsible for checking level-1 admin codes.
  * 
@@ -17,5 +19,11 @@ public interface Admin1CodeService {
 	 * @return The admin name, given an admin code of level 1; null if not found
 	 */
 	String getAdmin1NameByCode(String admin1Code);
+
+	/**
+	 * 
+	 * @return All admin1Codes
+	 */
+	List<String> allAdmin1Codes();
 
 }

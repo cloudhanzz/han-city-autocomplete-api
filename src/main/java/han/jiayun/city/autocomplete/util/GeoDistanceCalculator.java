@@ -34,7 +34,7 @@ public class GeoDistanceCalculator {
 
 	private final static double RADIANS_FACTOR = Math.PI / 180;
 	private final static double EARTH_RADIUS_IN_KM = 6372.8;
-	
+
 	public static double haversineDistance(GeoName geoA, GeoName geoB) {
 		Coordinate a = new Coordinate(geoA.getLatitude(), geoA.getLongitude());
 		Coordinate b = new Coordinate(geoB.getLatitude(), geoB.getLongitude());
@@ -66,31 +66,9 @@ public class GeoDistanceCalculator {
 	 * Returns the radians value of a degree value
 	 * 
 	 * @param degree
-	 * @return
+	 * @return the Radians representation
 	 */
 	private static double toRadian(double degree) {
 		return degree * RADIANS_FACTOR;
-	}
-
-	public static void main(String[] args) {
-		double lat1 = 46.42886;
-		double log1 = -50.81995;
-		Coordinate c1 = new Coordinate();
-		c1.setLatitude(lat1);
-		c1.setLongitude(log1);
-
-		// double lat2 = 46.44743;
-		// double log2 = -50.48577;
-
-		double lat2 = 46.12518;
-		double log2 = -122.99112;
-
-		Coordinate c2 = new Coordinate();
-		c2.setLatitude(lat2);
-		c2.setLongitude(log2);
-
-		double distance = haversineDistance(c1, c2);
-
-		System.out.println("Distance = " + distance);
 	}
 }

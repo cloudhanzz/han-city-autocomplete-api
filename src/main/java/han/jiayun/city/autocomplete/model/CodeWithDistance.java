@@ -12,7 +12,13 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @ToString
-public class CodeWithDistance {
+public class CodeWithDistance implements Comparable<CodeWithDistance> {
+	
 	private String admin1Code;
 	private double distance;
+	
+	@Override
+	public int compareTo(CodeWithDistance o) {
+		return Double.compare(distance, o.distance);
+	}
 }
