@@ -20,4 +20,9 @@ public class Coordinate {
 
 	public Coordinate() {
 	}	
+	
+	public Coordinate(double latitude, double longitude) {
+		setLatitude(latitude);
+		setLongitude(longitude);
+	}
 }
