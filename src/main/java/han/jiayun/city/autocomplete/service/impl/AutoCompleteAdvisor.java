@@ -1,5 +1,6 @@
 package han.jiayun.city.autocomplete.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,6 @@ import han.jiayun.city.autocomplete.service.AutoCompleteService;
 import han.jiayun.city.autocomplete.service.LongitudeValidatingService;
 import han.jiayun.city.autocomplete.service.QueryTermOnlySearchService;
 import han.jiayun.city.autocomplete.service.QueryTermValidingService;
-import han.jiayun.city.autocomplete.stub.SuggestionStubber;
 
 @Service
 public class AutoCompleteAdvisor implements AutoCompleteService {	
@@ -38,12 +38,12 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 		latitudeValidatingService.validate(latitude);
 		longitudeValidatingService.validate(longitude);
 
-		List<Suggestion> suggestions;
+		List<Suggestion> suggestions = new ArrayList<>();
 		
 		if (latitude.isEmpty() && longitude.isEmpty()) {
 			suggestions = queryTermOnlySearchService.searchLocations(queryTerm, limit);
 		} else {
-			suggestions = SuggestionStubber.cannedSuggestions();
+			// call advisor that handle coordinates as well
 		}
 		
 		Collections.sort(suggestions);
