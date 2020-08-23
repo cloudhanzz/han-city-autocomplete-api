@@ -35,26 +35,26 @@ public class GeoDistanceCalculator {
 	private final static double RADIANS_FACTOR = Math.PI / 180;
 	private final static double EARTH_RADIUS_IN_KM = 6372.8;
 
-	public static double haversineDistance(GeoName geoA, GeoName geoB) {
-		Coordinate a = new Coordinate(geoA.getLatitude(), geoA.getLongitude());
-		Coordinate b = new Coordinate(geoB.getLatitude(), geoB.getLongitude());
+	public static double haversineDistance(GeoName geoNameA, GeoName geoNameB) {
+		Coordinate a = new Coordinate(geoNameA.getLatitude(), geoNameA.getLongitude());
+		Coordinate b = new Coordinate(geoNameB.getLatitude(), geoNameB.getLongitude());
 		return haversineDistance(a, b);
 	}
 
 	/**
 	 * Returns the distance between two coordinates
 	 * 
-	 * @param geoA The first coordinate
-	 * @param geoB The second coordinate
+	 * @param coordinateA The first coordinate
+	 * @param coordinateB The second coordinate
 	 * @return The Haversine distance between these two points
 	 */
-	public static double haversineDistance(Coordinate geoA, Coordinate geoB) {
+	public static double haversineDistance(Coordinate coordinateA, Coordinate coordinateB) {
 
-		double latitudeDelta = toRadian(geoB.getLatitude() - geoA.getLatitude());
-		double longitudeDelta = toRadian(geoB.getLongitude() - geoA.getLongitude());
+		double latitudeDelta = toRadian(coordinateB.getLatitude() - coordinateA.getLatitude());
+		double longitudeDelta = toRadian(coordinateB.getLongitude() - coordinateA.getLongitude());
 
-		double latitudeRadianA = toRadian(geoA.getLatitude());
-		double latitudeRadianB = toRadian(geoB.getLatitude());
+		double latitudeRadianA = toRadian(coordinateA.getLatitude());
+		double latitudeRadianB = toRadian(coordinateB.getLatitude());
 
 		double d = Math.pow(Math.sin(latitudeDelta / 2), 2)
 				+ Math.pow(Math.sin(longitudeDelta / 2), 2) * Math.cos(latitudeRadianA) * Math.cos(latitudeRadianB);

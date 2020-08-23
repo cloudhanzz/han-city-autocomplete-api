@@ -8,7 +8,7 @@ import han.jiayun.city.autocomplete.model.GeoName;
 /**
  * 
  * @author Jiayun Han
- *
+ * TODO: single responsibility
  */
 public interface GeoNameService {
 

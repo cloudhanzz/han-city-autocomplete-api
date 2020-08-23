@@ -45,12 +45,15 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 		List<Suggestion> suggestions = new ArrayList<>();
 		
 		if (latitude.isEmpty() || longitude.isEmpty()) {
+			
 			suggestions = queryTermOnlySearchService.searchLocations(queryTerm, limit);
+			Collections.sort(suggestions);
+			
 		} else {
+			
+			// already sorted by this special service, no further sort is needed
 			suggestions = searchWithCoordinateService.searchLocations(queryTerm, limit, latitude.get(), longitude.get());
-		}
-		
-		Collections.sort(suggestions);
+		}		
 		
 		return suggestions;
 	}

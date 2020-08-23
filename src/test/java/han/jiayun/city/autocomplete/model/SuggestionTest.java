@@ -2,6 +2,7 @@ package han.jiayun.city.autocomplete.model;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +25,8 @@ public class SuggestionTest {
 	private Suggestion suggestion_point_5;
 	private Suggestion suggestion_point_6;
 	private Suggestion suggestion_point_9;
+	
+	private List<Suggestion> suggestions;
 
 	@BeforeEach
 	public void createSuggestions() {
@@ -39,18 +42,20 @@ public class SuggestionTest {
 
 		suggestion_point_9 = new Suggestion().name("London, ON, Canada").latitude(42.98339).longitude(-81.23304)
 				.score(0.9);
-	}
-
-	@Test
-	@DisplayName("Suggestions are ordered by their scores in descending manner.")
-	public void test_sorted_in_descending_manner() {
-		List<Suggestion> suggestions = new ArrayList<>();
+		
+		suggestions = new ArrayList<>();
+		
 		suggestions.add(suggestion_point_3);
 		suggestions.add(suggestion_point_5);
 		suggestions.add(suggestion_point_6);
 		suggestions.add(suggestion_point_9);
 
 		Collections.sort(suggestions);
+	}
+
+	@Test
+	@DisplayName("Suggestions are ordered by their scores in descending manner.")
+	public void test_sorted_in_descending_manner() {
 
 		assertAll("All of the following should be true", () -> assertEquals(0.9, suggestions.get(0).getScore()),
 				() -> assertEquals(0.6, suggestions.get(1).getScore()),
@@ -58,4 +63,15 @@ public class SuggestionTest {
 				() -> assertEquals(0.3, suggestions.get(3).getScore()));
 	}
 
+	@Test
+	@DisplayName("A suggestion with higher score should be treated as better")
+	public void testBetterThan() {
+
+		assertAll(() -> assertTrue(suggestion_point_9.isBetterThan(suggestion_point_3)),
+				() -> assertTrue(suggestion_point_9.isBetterThan(suggestion_point_6)),
+				() -> assertTrue(suggestion_point_9.isBetterThan(suggestion_point_5)),
+				() -> assertTrue(suggestion_point_6.isBetterThan(suggestion_point_5)),
+				() -> assertTrue(suggestion_point_6.isBetterThan(suggestion_point_3)),
+				() -> assertTrue(suggestion_point_5.isBetterThan(suggestion_point_3)));
+	}
 }

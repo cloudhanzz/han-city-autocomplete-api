@@ -2,6 +2,7 @@ package han.jiayun.city.autocomplete.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class QueryTermOnlySearcher implements QueryTermOnlySearchService {
 				
 				counter++;
 				
-				Suggestion suggestion = suggestionBuildingService.toSuggestion(geoName, queryTerm);
+				Suggestion suggestion = suggestionBuildingService.toSuggestion(geoName, queryTerm, Optional.empty());
 				suggestions.add(suggestion);
 			}
 			

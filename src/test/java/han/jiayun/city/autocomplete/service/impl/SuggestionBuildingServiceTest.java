@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -32,7 +34,7 @@ public class SuggestionBuildingServiceTest {
 	public void can_be_built(String geoLine) {
 		
 		GeoName geoName = new GeoName(geoLine);
-		Suggestion suggestion = suggestionBuildingService.toSuggestion(geoName, "Londo");
+		Suggestion suggestion = suggestionBuildingService.toSuggestion(geoName, "Londo", Optional.empty());
 		
 		double score = suggestion.getScore();
 		boolean greaterThanZero = Double.compare(score, 0) > 0;
