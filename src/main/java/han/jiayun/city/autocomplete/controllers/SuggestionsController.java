@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,11 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping(value = "/cityautocomplete/v1.0", produces = "application/json")
 public class SuggestionsController {
 	
+	@Value("${suggestion.limit:50}")
+	private int suggestionLimit;
+	
 	@Autowired
-	private AutoCompleteService locationService;
+	private AutoCompleteService autoCompleteService;
 	
 	@GetMapping("/suggestions")
 	@ApiOperation(value = "Suggest locations based on the query criteria", response = Suggestion.class, responseContainer = "List")
@@ -35,7 +39,7 @@ public class SuggestionsController {
 	public List<Suggestion> getSuggestions(@RequestParam("q") String queryString,
 			@RequestParam Optional<Double> latitude,
 			@RequestParam Optional<Double> longitude) {
-		return locationService.searchLocations(queryString, latitude, longitude);
+		return autoCompleteService.searchLocations(queryString, suggestionLimit, latitude, longitude);
 	}
 	
 }
