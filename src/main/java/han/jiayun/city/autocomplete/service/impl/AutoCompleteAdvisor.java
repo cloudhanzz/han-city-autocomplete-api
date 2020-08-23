@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 import han.jiayun.city.autocomplete.model.Suggestion;
 import han.jiayun.city.autocomplete.service.LatitudeValidatingService;
-import han.jiayun.city.autocomplete.service.LocationService;
+import han.jiayun.city.autocomplete.service.AutoCompleteService;
 import han.jiayun.city.autocomplete.service.LongitudeValidatingService;
 import han.jiayun.city.autocomplete.service.QueryTermValidingService;
 import han.jiayun.city.autocomplete.stub.SuggestionStubber;
 
 @Service
-public class MockLocationService implements LocationService {	
+public class AutoCompleteAdvisor implements AutoCompleteService {	
 
 	@Autowired
 	private QueryTermValidingService queryTermValidingService;

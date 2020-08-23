@@ -12,7 +12,7 @@ import han.jiayun.city.autocomplete.model.Suggestion;
  *
  */
 @FunctionalInterface
-public interface LocationService {
+public interface AutoCompleteService {
 
 	/**
 	 * Returns a list of suggested locations based on the query string and the

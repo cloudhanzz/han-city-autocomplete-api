@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import han.jiayun.city.autocomplete.model.Suggestion;
-import han.jiayun.city.autocomplete.service.LocationService;
+import han.jiayun.city.autocomplete.service.AutoCompleteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiResponses;
 public class SuggestionsController {
 	
 	@Autowired
-	private LocationService locationService;
+	private AutoCompleteService locationService;
 	
 	@GetMapping("/suggestions")
 	@ApiOperation(value = "Suggest locations based on the query criteria", response = Suggestion.class, responseContainer = "List")
