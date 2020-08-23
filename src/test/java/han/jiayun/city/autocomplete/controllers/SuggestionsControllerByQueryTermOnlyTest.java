@@ -26,10 +26,19 @@ private static final String BASE_URL = "/cityautocomplete/v1.0/suggestions";
 	private int limit;
 
 	@Test
-	@DisplayName("Should return required number of locations starting with Londo with scores.")
+	@DisplayName("Should return required number of locations starting with Londo with scores")
 	public void return_required_suggestions_for_Londo() throws Exception {
 		mvc.perform(get(BASE_URL+ "?q=Londo")) //
 				.andExpect(status().isOk()) //
 				.andExpect(jsonPath("$", hasSize(limit)));
+	}
+
+	@Test
+	@DisplayName("Should return zero suggestions for a bogus query term")
+	public void no_suggestion_returned_for_a_bogus_query_term() throws Exception {
+		String queryTerm = "a-really-wild-bogus-query-term";
+		mvc.perform(get(BASE_URL+ "?q=" + queryTerm)) //
+				.andExpect(status().isOk()) //
+				.andExpect(jsonPath("$", hasSize(0)));
 	}
 }
