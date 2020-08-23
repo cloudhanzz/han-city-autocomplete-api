@@ -25,7 +25,7 @@ import han.jiayun.city.autocomplete.exceptions.InvalidQueryStringException;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DisplayName("Test getting location suggestions")
+@DisplayName("Test getting location suggestions: focus on error capturing")
 public class SuggestionsControllerTest {
 private static final String BASE_URL = "/cityautocomplete/v1.0/suggestions";
 	
