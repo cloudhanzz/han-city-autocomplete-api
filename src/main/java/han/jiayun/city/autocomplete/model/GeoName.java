@@ -15,7 +15,7 @@ import static han.jiayun.city.autocomplete.util.Constants.TAB_REGEX;
  */
 @Getter
 @Slf4j
-@ToString
+@ToString(callSuper = true)
 public class GeoName extends Coordinate {
 
 	public static final int CITY_IDX = 0;
