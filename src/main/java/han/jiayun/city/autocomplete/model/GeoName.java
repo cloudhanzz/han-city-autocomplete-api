@@ -66,4 +66,13 @@ public class GeoName extends Coordinate {
 	public boolean cityStartsWith(String prefix) {
 		return city.startsWith(prefix);
 	}
+
+	/**
+	 * A convenience method to return the coordinate of this instance
+	 * 
+	 * @return the coordinate of this instance
+	 */
+	public Coordinate getCoordinate() {
+		return new Coordinate(getLatitude(), getLongitude());
+	}
 }
