@@ -8,9 +8,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import han.jiayun.city.autocomplete.model.Coordinate;
 import han.jiayun.city.autocomplete.model.Suggestion;
 import han.jiayun.city.autocomplete.service.LatitudeValidatingService;
 import han.jiayun.city.autocomplete.service.AutoCompleteService;
+import han.jiayun.city.autocomplete.service.GeoNameService;
 import han.jiayun.city.autocomplete.service.LongitudeValidatingService;
 import han.jiayun.city.autocomplete.service.QueryTermOnlySearchService;
 import han.jiayun.city.autocomplete.service.QueryTermValidingService;
@@ -34,6 +36,9 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 	@Autowired
 	private SearchWithCoordinateService searchWithCoordinateService;
 
+	@Autowired
+	private GeoNameService geoNameService;
+
 	@Override
 	public List<Suggestion> searchLocations(String queryTerm, int limit, Optional<Double> latitude,
 			Optional<Double> longitude) {
@@ -44,7 +49,7 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 
 		List<Suggestion> suggestions = new ArrayList<>();
 		
-		if (latitude.isEmpty() || longitude.isEmpty()) {
+		if (latitude.isEmpty() || longitude.isEmpty() || coordinateNotFound(latitude.get(), longitude.get())) {
 			
 			suggestions = queryTermOnlySearchService.searchLocations(queryTerm, limit);
 			Collections.sort(suggestions);
@@ -56,5 +61,11 @@ public class AutoCompleteAdvisor implements AutoCompleteService {
 		}		
 		
 		return suggestions;
+	}
+
+	private boolean coordinateNotFound(double latitude, double longitude) {
+		Coordinate coordinate = new Coordinate(latitude, longitude);
+		String admin1Code = geoNameService.getAdmin1ByCoordinate(coordinate);
+		return admin1Code == null;
 	}
 }

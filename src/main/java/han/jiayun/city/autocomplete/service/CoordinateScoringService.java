@@ -20,4 +20,12 @@ public interface CoordinateScoringService {
 	 */
 	double score(Coordinate coordinateA, Coordinate coordinateB);
 
+	/**
+	 * Returns the score converted from a geographic distance
+	 * 
+	 * @param distance
+	 * @return the score converted from a geographic distance
+	 */
+	double toScore(double distance);
+
 }

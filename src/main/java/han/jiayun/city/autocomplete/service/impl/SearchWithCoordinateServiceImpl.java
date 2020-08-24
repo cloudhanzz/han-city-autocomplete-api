@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import han.jiayun.city.autocomplete.model.Coordinate;
 import han.jiayun.city.autocomplete.model.GeoName;
 import han.jiayun.city.autocomplete.model.Suggestion;
+import han.jiayun.city.autocomplete.service.Admin1CodeService;
 import han.jiayun.city.autocomplete.service.EvolutionService;
 import han.jiayun.city.autocomplete.service.GeoNameService;
 import han.jiayun.city.autocomplete.service.OptimalPathService;
 import han.jiayun.city.autocomplete.service.SearchWithCoordinateService;
 import han.jiayun.city.autocomplete.service.SuggestionBuildingService;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -22,6 +24,7 @@ import han.jiayun.city.autocomplete.service.SuggestionBuildingService;
  *
  */
 @Service
+@Slf4j
 public class SearchWithCoordinateServiceImpl implements SearchWithCoordinateService {
 
 	@Autowired
@@ -35,6 +38,9 @@ public class SearchWithCoordinateServiceImpl implements SearchWithCoordinateServ
 
 	@Autowired
 	private EvolutionService evolutionService;
+	
+	@Autowired
+	private Admin1CodeService admin1CodeService;
 
 	@Override
 	public List<Suggestion> searchLocations(String queryTerm, int limit, double latitude, double longitude) {
@@ -49,6 +55,10 @@ public class SearchWithCoordinateServiceImpl implements SearchWithCoordinateServ
 
 		Optional<Coordinate> optCoordinate = Optional.of(cordinate);
 		for (String admin1Code : admin1Codes) {
+			
+			String admin1Name = admin1CodeService.getAdmin1NameByCode(bestAdmin1Code);
+			log.info("Search {} area ...", admin1Name);
+			
 			suggestByAdmin1Code(queryTerm, limit, suggestions, admin1Code, optCoordinate);
 		}
 
@@ -61,7 +71,6 @@ public class SearchWithCoordinateServiceImpl implements SearchWithCoordinateServ
 
 		for (GeoName geoName : geoNames) {
 			if (geoName.cityStartsWith(queryTerm)) {
-				// calculate distance score
 				Suggestion suggestion = suggestionBuildingService.toSuggestion(geoName, queryTerm, optCordinate);
 				evolutionService.evolve(limit, suggestions, suggestion);
 			}
