@@ -13,7 +13,6 @@ import han.jiayun.city.autocomplete.service.CoordinateScoringService;
 import han.jiayun.city.autocomplete.service.NameOnlyScoringService;
 import han.jiayun.city.autocomplete.service.SuggestionBuildingService;
 import han.jiayun.city.autocomplete.service.SuggestionNamingService;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -21,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Service
-@Slf4j
 public class SuggestionBuilder implements SuggestionBuildingService {
 	
 	@Value("${name.weight:0.25}")
@@ -48,10 +46,8 @@ public class SuggestionBuilder implements SuggestionBuildingService {
 		double scoreByName = nameOnlyScoringService.score(queryTerm, geoName.getCity());
 		
 		if(queryCoordinate.isEmpty()) {
-			log.info("No coordinate is provided. Use query term score only.");
 			score = scoreByName;
 		}else {
-			log.info("Final score is contributed by both query term score and geo-distance score.");
 			double scoreByCoordinate = coordinateScoringService.score(geoName.getCoordinate(), queryCoordinate.get());
 			score = scoreByName * nameWeight + scoreByCoordinate * coordinateWeight;
 		}

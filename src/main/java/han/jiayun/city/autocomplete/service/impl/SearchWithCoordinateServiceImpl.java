@@ -56,7 +56,7 @@ public class SearchWithCoordinateServiceImpl implements SearchWithCoordinateServ
 		Optional<Coordinate> optCoordinate = Optional.of(cordinate);
 		for (String admin1Code : admin1Codes) {
 			
-			String admin1Name = admin1CodeService.getAdmin1NameByCode(bestAdmin1Code);
+			String admin1Name = admin1CodeService.getAdmin1NameByCode(admin1Code);
 			log.info("Search {} area ...", admin1Name);
 			
 			suggestByAdmin1Code(queryTerm, limit, suggestions, admin1Code, optCoordinate);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import han.jiayun.city.autocomplete.model.Suggestion;
 import han.jiayun.city.autocomplete.service.EvolutionService;
 import han.jiayun.city.autocomplete.util.SortingUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -14,6 +15,7 @@ import han.jiayun.city.autocomplete.util.SortingUtil;
  *
  */
 @Service
+@Slf4j
 public class EvolutionServiceImpl implements EvolutionService {
 
 	@Override
@@ -45,6 +47,8 @@ public class EvolutionServiceImpl implements EvolutionService {
 
 			suggestions.remove(lastIndex);
 			evolved = evolveUnconditionally(suggestions, newSuggestion);
+			
+			log.info("Evolved with a better suggestion (score = {})", newSuggestion.getScore());
 		}
 		
 		return evolved;
