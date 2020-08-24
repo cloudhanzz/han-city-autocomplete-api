@@ -28,7 +28,7 @@ public interface AutoCompleteService {
 	 * @param longitude It can be absent; but once present it must be in the range
 	 *                  of -180 and 180, both inclusive, and be in the format of
 	 *                  signed degrees.
-	 * @return
+	 * @return the list of Suggestions ordered by their matching scores
 	 */
 	List<Suggestion> searchLocations(String queryTerm, int limit, Optional<Double> latitude, Optional<Double> longitude);
 }
